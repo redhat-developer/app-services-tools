@@ -34,6 +34,11 @@ COPY contrib/rhoas /usr/local/bin/rhoas
 COPY contrib/oc /usr/local/bin/oc
 COPY contrib/odo /usr/local/bin/odo
 
+USER root
+RUN echo "{}" > /.rhoascli.json && chmod 777 /.rhoascli.json
+RUN mkdir /.kube && chmod 777 /.kube
+USER rhoas
+
 COPY --from=builder --chown=root:root /opt/kafkacat/kafkacat /usr/local/bin/kafkacat
 
 ENTRYPOINT ["tail", "-f", "/dev/null"]
