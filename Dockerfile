@@ -1,5 +1,4 @@
 FROM registry.access.redhat.com/ubi8/ubi as builder
-#as builder
 
 RUN yum install git -y
 RUN yum install gcc -y
