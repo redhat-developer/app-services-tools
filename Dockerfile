@@ -35,3 +35,5 @@ COPY contrib/oc /usr/local/bin/oc
 COPY contrib/odo /usr/local/bin/odo
 
 COPY --from=builder --chown=root:root /opt/kafkacat/kafkacat /usr/local/bin/kafkacat
+
+ENTRYPOINT ["tail", "-f", "/dev/null"]
