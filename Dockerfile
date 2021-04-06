@@ -10,8 +10,8 @@ RUN yum install cmake -y
 RUN yum install diffutils -y
 RUN yum install curl-devel -y
 
-#Using version 1.5 of Kafkacat. Version 1.6 has an issue where it doesn't accept input in producer mode until you hit Ctrl-D.
-RUN git clone --depth 1 --branch 1.5.0 https://github.com/edenhill/kafkacat /opt/kafkacat    
+#Using version 1.6 of Kafkacat. Build from master has an issue where it doesn't accept input in producer mode until you hit Ctrl-D.
+RUN git clone --depth 1 --branch 1.6.0 https://github.com/edenhill/kafkacat /opt/kafkacat    
 RUN pushd /opt/kafkacat && ./bootstrap.sh
 
 # ---------------------------------------------------------------------------- #
