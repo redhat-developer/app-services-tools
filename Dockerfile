@@ -35,7 +35,7 @@ COPY contrib/oc /usr/local/bin/oc
 COPY contrib/odo /usr/local/bin/odo
 
 USER root
-RUN echo "{}" > /.rhoascli.json && chmod 777 /.rhoascli.json
+RUN mkdir -p /.config/rhoas && chmod 777 -R /.config/rhoas && echo "{}" > /.config/rhoas/config.json && chmod 777 /.config/rhoas/config.json
 RUN mkdir /.kube && chmod 777 /.kube
 USER rhoas
 
