@@ -5,16 +5,16 @@ set -e
 
 function startHealthCheck {
     echo "\n"
-    echo "################################################"
+    echo "##########################################################"
     echo "Starting OpenShift Streams Health Check"
-    echo "################################################"
+    echo "##########################################################"
 }
 
 function completeHealthCheck {
     echo "\n"
-    echo "################################################"
-    echo "OpenShift Streams Health Check completed"
-    echo "################################################"
+    echo "##########################################################"
+    echo "OpenShift Streams Health Check completed successfully"
+    echo "##########################################################"
 }
 
 function checkRhoasCliAvailable {
@@ -35,7 +35,15 @@ function checkKcatAvailable {
 
 function login {
     echo "Login to OpenShift Application Services control plane." 
-    rhoas login --token=$1
+    if [ -z "$1" ]
+    then
+        echo "Using browser-based login flow."
+        rhoas login
+    else
+        echo "Using offline token login flow."
+        rhoas login --token=$1
+    fi
+    
 }
 
 function createKafka {

@@ -25,13 +25,17 @@ function usage {
       echo "Usage: create-service-account.sh [args...]"
       echo "where args include:"
       echo "    -s              The name of the service account to be created."
+      echo "    -o              Offline authentication token. Browser based login will be used if not specified."
 }
 
 #Parse the params
-while getopts ":s:h" opt; do
+while getopts ":s:o:h" opt; do
   case $opt in
     s)
       SERVICE_ACCOUNT_NAME=$OPTARG
+      ;;
+    o)
+      OFFLINE_TOKEN=$OPTARG
       ;;
     h)
       usage
@@ -74,7 +78,7 @@ startHealthCheck
 
 checkRhoasCliAvailable
 
-login
+login $OFFLINE_TOKEN
 
 createServiceAccount $SERVICE_ACCOUNT_NAME
 
@@ -100,6 +104,6 @@ echo "Service Account succesfully created!"
 deleteServiceAccount $SERVICE_ACCOUNT_ID
 
 echo "Clean up service account environment variable file."
-rm sa.env
+#rm sa.env
 
 completeHealthCheck
