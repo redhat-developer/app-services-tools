@@ -94,6 +94,7 @@ sleep 5
 
 describeTopic $TOPIC_NAME
 
+echo "Cleaning up topic."
 deleteTopic $TOPIC_NAME
 
 completeHealthCheck

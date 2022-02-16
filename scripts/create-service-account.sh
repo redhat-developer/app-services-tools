@@ -93,7 +93,7 @@ getServiceAccountIdByClientId $CLIENT_ID
 if [ -z "$SERVICE_ACCOUNT_ID" ]
 then
   echo "No SERVICE_ACCOUNT id set. Service Acccount not found. Unable to perform operations on the given Service Account."
-  exit 1
+  ERROR_CODE=1
 else
   #deleteServiceAccount $SERVICE_ACCOUNT
   echo "Service Account ID of the new Service Account: $SERVICE_ACCOUNT_ID"
@@ -101,9 +101,16 @@ fi
 
 echo "Service Account succesfully created!"
 
+echo "Cleaning up Service Account."
 deleteServiceAccount $SERVICE_ACCOUNT_ID
 
 echo "Clean up service account environment variable file."
-#rm sa.env
+rm sa.env
+
+if [-n "$ERROR_CODE" ]
+then
+  echo "Errror while running healthcheck."
+  exit $ERROR_CODE
+fi
 
 completeHealthCheck

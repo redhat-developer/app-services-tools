@@ -33,6 +33,14 @@ function checkKcatAvailable {
     fi
 }
 
+function checkJqAvailable {
+    if ! command -v jq &> /dev/null
+    then
+        echo "jq could not be found"
+        exit
+    fi
+}
+
 function login {
     echo "Login to OpenShift Application Services control plane." 
     if [ -z "$1" ]
@@ -54,6 +62,11 @@ function createKafka {
 function useKafka {
     echo "Using Kafka with name $1"
     rhoas kafka use --name=$1
+}
+
+function getBootstrapServerHost {
+    echo "Retrieving Kafka bootstrap-server-host value."
+    BOOTSTRAP_SERVER_HOST=$(rhoas kafka describe | jq -r .bootstrap_server_host)
 }
 
 function listTopics {
@@ -87,6 +100,12 @@ function createServiceAccount {
 function getServiceAccountIdByClientId {
     echo "Retrieving the Service Account ID from the account's Client ID."
     SERVICE_ACCOUNT_ID=$(rhoas service-account list | awk -v service_id=$1 '$2==service_id{print $1}')
+}
+
+function grantTopicProducerConsumerAccessToServiceAccount {
+
+    echo "Grant produce and consume rights for topic $2 to service account $1"
+    rhoas kafka acl grant-access --producer --consumer --service-account $1 --topic $2 --group healthcheck -y
 }
 
 function deleteServiceAccount {
