@@ -2,6 +2,12 @@
 
 Scripts that allow the user to check whether their OpenShift Application Services function correctly.
 
+### Prerequisits
+The scripts require the following tools to be installed:
+- rhoas CLI: https://github.com/redhat-developer/app-services-cli/releases
+- kcat: https://github.com/edenhill/kcat
+- jq: https://stedolan.github.io/jq/
+
 ## create-topic.sh
 Tests topic creation on an existing OpenShift Streams for Apache Kafka instance. This script requires a browser-based login flow and does not support authentication based on offline tokens (yet).
 
