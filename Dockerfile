@@ -1,14 +1,9 @@
 FROM registry.access.redhat.com/ubi8/ubi as builder
 
-RUN yum install git -y
-RUN yum install gcc -y
-RUN yum install gcc-c++ -y 
-RUN yum install python3 -y 
-RUN yum install cyrus-sasl-devel -y
-RUN yum install make -y
-RUN yum install cmake -y
-RUN yum install diffutils -y
-RUN yum install curl-devel -y
+RUN yum install \
+	git gcc gcc-c++ python3 \
+	cyrus-sasl-devel make \
+	cmake diffutils curl-devel -y
 
 #Using version 1.6 of Kafkacat. Build from master has an issue where it doesn't accept input in producer mode until you hit Ctrl-D.
 RUN git clone --depth 1 --branch 1.6.0 https://github.com/edenhill/kafkacat /opt/kafkacat    
@@ -23,8 +18,7 @@ ENV RHOAS_CLI_PATH="/usr/local/bin/rhoas"
 ENV OC_CLI_PATH="/usr/local/bin/oc"
 
 # Install required packages
-RUN microdnf install shadow-utils
-RUN microdnf install yum
+RUN microdnf install shadow-utils yum
 
 # Create the RHOAS user
 RUN useradd -ms /bin/bash rhoas
