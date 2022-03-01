@@ -1,3 +1,9 @@
 #!/bin/sh
 
-docker build --rm -t ddoyle/rhoas-devsandbox-workshop-tools .
+set -uo pipefail
+
+registry=${REGISTRY:-quay.io}
+username=${USERNAME}
+
+docker build --build-arg RHOAS_VERSION=$TAG --rm -t $registry/$username/tools .
+docker tag $registry/$username/tools $registry/$username:$TAG

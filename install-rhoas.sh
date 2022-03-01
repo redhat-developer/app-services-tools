@@ -2,7 +2,7 @@
 
 set -uo pipefail
 
-tag=${TAG:-100}
+tag=${TAG}
 release_name=${tag/#"v"}
 os="${OS:-linux}" # linux, macOS
 arch="${ARCH:-amd64}" # amd64, arm64
