@@ -8,8 +8,8 @@ RUN yum update -y && yum install \
 
 COPY ./install-rhoas.sh .
 
-ENV TAG=v0.39.0
-RUN RHOAS_CLI_PATH=/opt/rhoas ./install-rhoas.sh
+ARG RHOAS_VERSION
+RUN RHOAS_CLI_PATH=/opt/rhoas TAG=$RHOAS_VERSION ./install-rhoas.sh
 
 #Using version 1.6 of Kafkacat. Build from master has an issue where it doesn't accept input in producer mode until you hit Ctrl-D.
 RUN git clone --depth 1 --branch 1.6.0 https://github.com/edenhill/kafkacat /opt/kafkacat    
