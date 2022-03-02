@@ -1,6 +1,6 @@
 #!/bin/bash
 
-# set -uo pipefail
+set -uo pipefail
 
 rhoas_version=$TAG
 image_tag=${rhoas_version/#"v"}
