@@ -13,11 +13,9 @@ jobs:
     steps:
       - uses: actions/checkout@v2
       - name: Build Image
-        run: |
-          TAG=$RHOAS_VERSION ./build-docker-container.sh
+        run: ./build-docker-container.sh
         env:
-          REGISTRY_USERNAME: ${{ secrets.quayUsername }}
-          RHOAS_VERSION: ${{ github.event.inputs.rhoasVersion }}
+          TAG: ${{ github.event.inputs.rhoasVersion }}
   push:
     depends-on: build-image
     runs-on: ubuntu-latest
@@ -29,9 +27,8 @@ jobs:
           QUAY_PASSWORD: ${{ secrets.quayPassword }}
       - id: Push to Quay.io
         run: |
-          docker push quay.io/$QUAY_USERNAME/tools
-          docker push quay.io/$QUAY_USERNAME/tools:$TAG
+          docker push quay.io/rhoas/tools
+          docker push quay.io/rhoas/tools:$TAG
         env:
-          QUAY_USERNAME: ${{ secrets.quayUsername }}
           TAG: ${{ github.event.inputs.rhoasVersion }}
         
