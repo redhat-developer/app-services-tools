@@ -33,6 +33,7 @@ USER rhoas
 COPY contrib/oc /usr/local/bin/oc
 COPY contrib/odo /usr/local/bin/odo
 COPY --from=builder --chown=root:root /opt/rhoas ${RHOAS_CLI_PATH}
+COPY scripts /usr/local/bin
 
 USER root
 RUN mkdir -p /.config/rhoas && chmod 777 -R /.config/rhoas && echo "{}" > /.config/rhoas/config.json && chmod 777 /.config/rhoas/config.json
