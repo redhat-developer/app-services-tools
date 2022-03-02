@@ -2,7 +2,7 @@
 
 set -uo pipefail
 
-rhoas_version=$TAG
+rhoas_version=$RHOAS_VERSION
 image_tag=${rhoas_version/#"v"}
 
 registry=${REGISTRY:-quay.io}

@@ -15,7 +15,7 @@ jobs:
       - name: Build Image
         run: ./build-docker-container.sh
         env:
-          TAG: ${{ github.event.inputs.rhoasVersion }}
+          RHOAS_VERSION: ${{ github.event.inputs.rhoasVersion }}
   push:
     depends-on: build-image
     runs-on: ubuntu-latest
