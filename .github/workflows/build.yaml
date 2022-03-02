@@ -26,9 +26,7 @@ jobs:
           QUAY_USERNAME: ${{ secrets.quayUsername }}
           QUAY_PASSWORD: ${{ secrets.quayPassword }}
       - id: Push to Quay.io
-        run: |
-          docker push quay.io/rhoas/tools
-          docker push quay.io/rhoas/tools:$TAG
+        run: ./push-to-registry.sh
         env:
-          TAG: ${{ github.event.inputs.rhoasVersion }}
+          RHOAS_VERSION: ${{ github.event.inputs.rhoasVersion }}
         
