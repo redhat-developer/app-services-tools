@@ -24,7 +24,7 @@ ENV RHOAS_CLI_PATH="/usr/local/bin/rhoas"
 ENV OC_CLI_PATH="/usr/local/bin/oc"
 
 # Install required packages
-RUN microdnf install shadow-utils yum
+RUN microdnf install shadow-utils yum jq
 
 # Create the RHOAS user
 RUN useradd -ms /bin/bash rhoas
