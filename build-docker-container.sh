@@ -1,9 +1,14 @@
-#!/bin/sh
+#!/bin/bash
 
-set -uo pipefail
+# set -uo pipefail
+
+rhoas_version=$TAG
+image_tag=${rhoas_version/#"v"}
 
 registry=${REGISTRY:-quay.io}
-username=${REGISTRY_USERNAME:-rhoas}
+registry_org=${REGISTRY_ORG:-rhoas}
 
-docker build --build-arg RHOAS_VERSION=$TAG --rm -t $registry/$username/tools .
-docker tag $registry/$username/tools $registry/$username:$TAG
+image_name=$registry/$registry_org/tools
+
+docker build --build-arg RHOAS_VERSION=$rhoas_version --rm -t $image_name .
+docker tag $image_name $image_name:$image_tag

@@ -1,11 +1,13 @@
-#!/bin/sh
+#!/bin/bash
 
 set -uo pipefail
 
+tag=${TAG/#"v"} # remove "v" prefix
 registry=${REGISTRY:-quay.io}
-username=${USERNAME}
+registry_org=${REGISTRY_ORG:-rhoas}
 password=${PASSWORD}
 
-docker login ${registry} --username $USERNAME --password $PASSWORD
+image_name=$registry/$registry_org/tools
 
-docker push $registry/$username/tools
+# docker push $image_name
+# docker push $image_name:$tag
