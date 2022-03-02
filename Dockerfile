@@ -1,6 +1,6 @@
 FROM registry.access.redhat.com/ubi8/ubi as builder
 
-RUN yum install \
+RUN dnf install \
 	git gcc gcc-c++ python3 \
 	cyrus-sasl-devel make \
 	cmake diffutils curl-devel -y
@@ -18,7 +18,7 @@ ENV RHOAS_CLI_PATH="/usr/local/bin/rhoas"
 ENV OC_CLI_PATH="/usr/local/bin/oc"
 
 # Install required packages
-RUN microdnf install shadow-utils yum
+RUN microdnf install shadow-utils jq
 
 # Create the RHOAS user
 RUN useradd -ms /bin/bash rhoas
@@ -32,7 +32,9 @@ USER root
 RUN mkdir -p /.config/rhoas && chmod 777 -R /.config/rhoas && echo "{}" > /.config/rhoas/config.json && chmod 777 /.config/rhoas/config.json
 RUN mkdir /.kube && chmod 777 /.kube
 USER rhoas
+WORKDIR /home/rhoas
 
+COPY scripts /home/rhoas/scripts
 COPY --from=builder --chown=root:root /opt/kafkacat/kafkacat /usr/local/bin/kafkacat
 
 ENTRYPOINT ["tail", "-f", "/dev/null"]
