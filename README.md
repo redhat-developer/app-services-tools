@@ -9,8 +9,8 @@ Tools docker image that contain number of CLIs that can be executed as container
 
 ## Running image
 
-```
-docker run -ti --rm --name rhoas-devsandbox --entrypoint /bin/bash quay.io/rhosak/rhoas-tools
+```shell
+docker run -ti --rm --name rhoas-devsandbox --entrypoint /bin/bash quay.io/rhoas/tools
 ```
 
 ## Support scripts
