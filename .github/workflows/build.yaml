@@ -25,7 +25,7 @@ jobs:
         env:
           QUAY_USERNAME: ${{ secrets.quayUsername }}
           QUAY_PASSWORD: ${{ secrets.quayPassword }}
-      - id: Push to Quay.io
+      - name: Push to Quay.io
         run: ./push-to-registry.sh
         env:
           RHOAS_VERSION: ${{ github.event.inputs.rhoasVersion }}
