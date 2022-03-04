@@ -17,7 +17,7 @@ jobs:
         env:
           RHOAS_VERSION: ${{ github.event.inputs.rhoasVersion }}
   push:
-    depends-on: build-image
+    needs: build-image
     runs-on: ubuntu-latest
     steps:
       - name: Login to Quay.io
