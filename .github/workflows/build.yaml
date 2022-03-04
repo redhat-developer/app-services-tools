@@ -20,6 +20,7 @@ jobs:
     needs: build-image
     runs-on: ubuntu-latest
     steps:
+      - uses: actions/checkout@v2
       - name: Login to Quay.io
         run: docker login quay.io --username $QUAY_USERNAME --password $QUAY_PASSWORD
         env:
