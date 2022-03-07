@@ -5,10 +5,10 @@ on:
       rhoasVersion:
         description: 'Release version of the rhoas CLI'     
         required: true
-        default: 'error' 
+        default: '' 
         type: string
 jobs:
-  build-image:
+  docker-build-push:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
@@ -16,10 +16,6 @@ jobs:
         run: ./build-docker-container.sh
         env:
           RHOAS_VERSION: ${{ github.event.inputs.rhoasVersion }}
-  push:
-    needs: build-image
-    runs-on: ubuntu-latest
-    steps:
       - uses: actions/checkout@v2
       - name: Login to Quay.io
         run: docker login quay.io --username $QUAY_USERNAME --password $QUAY_PASSWORD
