@@ -16,7 +16,6 @@ jobs:
         run: ./build-docker-container.sh
         env:
           RHOAS_VERSION: ${{ github.event.inputs.rhoasVersion }}
-      - uses: actions/checkout@v2
       - name: Login to Quay.io
         run: docker login quay.io --username $QUAY_USERNAME --password $QUAY_PASSWORD
         env:
